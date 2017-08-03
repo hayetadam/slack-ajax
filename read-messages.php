@@ -1,7 +1,8 @@
 <?php
-include_once 'classes/Message.php';
-include_once 'classes/Database.php';
-$db = new Database();
+include_once './Message.php';
+include_once './Database.php';
 
-    
+$db = new Database();
+$messages = $db->readMessage();
+echo json_encode($messages);    
 ?>

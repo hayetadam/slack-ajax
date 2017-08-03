@@ -26,9 +26,9 @@
     <div class="row justify-content-md-center m-5">
         <div id="chat" class="row col-md-8">
         </div>
-        <form action="new-message.php" class="row col-md-8 m-3">
+        <form method="POST" action="new-message.php" class="row col-md-8 m-3">
             <label for="message">Message :</label>
-            <input type="text" class="form-control" id="message" name ="message" placeholder="Say hi !">
+            <input type="text" class="form-control" id="message" name="message" placeholder="Say hi !">
             <input type="submit" id="submit-message" value="send" class="btn btn-primary">
         </form>
     </div>
@@ -73,8 +73,34 @@
             xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded"); //pr indiquer au serveur les donnees, le contenu qu'on lui envoie
             xhr.send("message=" + input.value);
         });
-        // tp
+        // interval
+        setInterval(function() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'read-messages.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        let messages = JSON.parse(xhr.response);
+                        console.log(messages);
+                        for (let message of messages) {
+                            console.log(message);
+                        }
+                        display();
+                    } else {
+                        console.error('unexpected status code:', this.status);
+                    }
+                }
+            };
+
+            xhr.send(null);
+        }, 500);
     </script>
+
+
+
+
+
+
 </body>
 
 </html>

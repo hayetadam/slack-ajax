@@ -1,5 +1,5 @@
 <?php
-class Message {
+class Message implements \JsonSerializable {
     private $text;
     private $timestamp;
 
@@ -16,6 +16,8 @@ class Message {
     function getTimestamp() {
         return $this->timestamp;
     }
-
+public function jsonSerialize(){
+    return get_object_vars($this);
+}
  
 }

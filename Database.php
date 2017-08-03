@@ -15,4 +15,17 @@ class Database {
 
         return TRUE;
     }
+    //
+        public function readMessage() {
+        $stmt = $this->db->query('SELECT * FROM message');
+        $messages = $stmt->fetchAll();
+        $list = [];
+            foreach( $messages as $msg){
+$text = $msg['text'];
+$newMessage = new Message($text);
+$list[]= $newMessage;
+            }
+        return $list;
+        
+        }
 }
