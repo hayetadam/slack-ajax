@@ -28,12 +28,12 @@
         </div>
         <form action="new-message.php" class="row col-md-8 m-3">
             <label for="message">Message :</label>
-            <input type="text" class="form-control" id="message" placeholder="Say hi !">
+            <input type="text" class="form-control" id="message" name ="message" placeholder="Say hi !">
             <input type="submit" id="submit-message" value="send" class="btn btn-primary">
         </form>
     </div>
     <script>
-        let messages = ["toto", "tata"];
+        let messages = [];
 
         function display() {
             let div = document.querySelector("#chat");
@@ -61,7 +61,6 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-
                         console.log("success:" + xhr.responseText);
                         messages.push(input.value);
                         display();
