@@ -45,12 +45,9 @@
                 p.classList.add("col-md-12");
                 p.textContent = m;
                 div.appendChild(p);
-
-
             }
         }
         display();
-
         let submitMessage = document.querySelector('#submit-message');
         submitMessage.addEventListener('click', function(e) {
             e.preventDefault();
@@ -80,27 +77,24 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-                        let messages = JSON.parse(xhr.response);
+                        let tab = JSON.parse(xhr.response);
                         console.log(messages);
-                        for (let message of messages) {
-                            console.log(message);
+                        messages = [];
+                        for (let message of tab) {
+                            messages.push(message.text);
+                            console.log(messages);
+                            display();
+
                         }
-                        display();
+                        // display();
                     } else {
                         console.error('unexpected status code:', this.status);
                     }
                 }
             };
-
             xhr.send(null);
         }, 500);
     </script>
-
-
-
-
-
-
 </body>
 
 </html>
